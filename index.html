@@ -6,15 +6,22 @@
 </head><body>
 
 <!-- レイアウト -->
-<h1>ペンタトニックダイス
-  <div>pentatonic-dice</div>
-</h1>
+<h1>ペンタトニックダイス<div>pentatonic-dice</div></h1>
 <button id="play">ならす</button>
 
-<div class=credit>
-Idea: <a href=https://summit2021.code4japan.org/programs/7e7514eb116f4b8c9a2c7cc9f4d42dbf>作曲から考える子どものプログラミング思考について by さかい　りょうた</a> / <a href=https://ongakufactory.com/>おんがくふぁくとりー</a> / <a href=https://summit2021.code4japan.org/>Code for Japan Summit 2021</a><br>
-App: CC BY <a href=https://fukuno.jig.jp/3342>@taisukef</a> （<a href=https://ja.wikipedia.org/wiki/%E4%BA%94%E9%9F%B3%E9%9F%B3%E9%9A%8E>ペンタトニック - Wikipedia</a>）<br>
-</div>
+<!-- ロジック -->
+<script type="module">
+import { Tone } from "https://taisukef.github.io/Tone.js/Tone.mjs"; // https://tonejs.github.io/
+import { rnd } from "https://js.sabae.cc/rnd.js";
+
+const evt = play.ontouchstart ? "ontouchstart" : "onmousedown";
+play[evt] = () => {
+  const tone = "CDEGA"[rnd(5)];
+  const synth = new Tone.Synth().toMaster();
+  synth.triggerAttackRelease(tone + "4", "4n");
+  play.innerHTML = "ならす<br>" + tone;
+};
+</script>
 
 <!-- スタイル -->
 <link rel="stylesheet" href="https://code4fukui.github.io/neomo.css/neomo.css">
@@ -38,6 +45,14 @@ button {
   height: 40vw;
   font-size: 5vw;
 }
+</style>
+
+<!-- クレジット -->
+<div class=credit>
+Idea: <a href=https://summit2021.code4japan.org/programs/7e7514eb116f4b8c9a2c7cc9f4d42dbf>作曲から考える子どものプログラミング思考について by さかい　りょうた</a> / <a href=https://ongakufactory.com/>おんがくふぁくとりー</a> / <a href=https://summit2021.code4japan.org/>Code for Japan Summit 2021</a><br>
+App: CC BY <a href=https://fukuno.jig.jp/3342>@taisukef</a> （<a href=https://ja.wikipedia.org/wiki/%E4%BA%94%E9%9F%B3%E9%9F%B3%E9%9A%8E>ペンタトニック - Wikipedia</a>）<br>
+</div>
+<style>
 .credit {
   font-size: 70%;
   margin-top: 2em;
@@ -46,19 +61,6 @@ button {
   color: gray !important;
 }
 </style>
-
-<!-- ロジック -->
-<script type="module">
-import { Tone } from "https://taisukef.github.io/Tone.js/Tone.mjs";
-import { rnd } from "https://js.sabae.cc/rnd.js";
-
-const evt = play.ontouchstart ? "ontouchstart" : "onmousedown";
-play[evt] = () => {
-  const synth = new Tone.Synth().toMaster();
-  const tone = "CDEGA"[rnd(5)];
-  synth.triggerAttackRelease(tone + "4", "4n"); // C4の音、2分音符
-  play.innerHTML = "ならす<br>" + tone;
-};
-</script>
+    
 </body>
 </html>
