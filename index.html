@@ -1,0 +1,64 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:image"  content="https://code4fukui.github.io/pentatonic-dice/pentatonicdice.png">
+<meta name="twitter:image" content="https://code4fukui.github.io/pentatonic-dice/pentatonicdice.png">
+<title>ペンタトニックダイス - pentatonic-dice</title>
+</head><body>
+
+<!-- レイアウト -->
+<h1>ペンタトニックダイス
+  <div>pentatonic-dice</div>
+</h1>
+<button id="play">ならす</button>
+
+<div class=credit>
+Idea: <a href=https://summit2021.code4japan.org/programs/7e7514eb116f4b8c9a2c7cc9f4d42dbf>作曲から考える子どものプログラミング思考について by さかい　りょうた</a> / <a href=https://ongakufactory.com/>おんがくふぁくとりー</a> / <a href=https://summit2021.code4japan.org/>Code for Japan Summit 2021</a><br>
+App: CC BY <a href=https://fukuno.jig.jp/3342>@taisukef</a> （<a href=https://ja.wikipedia.org/wiki/%E4%BA%94%E9%9F%B3%E9%9F%B3%E9%9A%8E>ペンタトニック - Wikipedia</a>）<br>
+</div>
+
+<!-- スタイル -->
+<link rel="stylesheet" href="https://code4fukui.github.io/neomo.css/neomo.css">
+<style>
+body {
+  text-align: center;
+  background-color: #e8e8e8;
+  margin: 0 1em 0em 1em;
+}
+h1 {
+  font-size: 8vw;
+  margin: 0;
+  padding: 0.2em 0 0 0;
+}
+h1 div {
+  font-size: 3vw;
+}
+button {
+  margin: 1em;
+  width: 40vw;
+  height: 40vw;
+  font-size: 5vw;
+}
+.credit {
+  font-size: 70%;
+  margin-top: 2em;
+}
+.credit a {
+  color: gray !important;
+}
+</style>
+
+<!-- ロジック -->
+<script type="module">
+import { Tone } from "https://taisukef.github.io/Tone.js/Tone.mjs";
+import { rnd } from "https://js.sabae.cc/rnd.js";
+
+const evt = play.ontouchstart ? "ontouchstart" : "onmousedown";
+play[evt] = () => {
+  const synth = new Tone.Synth().toMaster();
+  const tone = "CDEGA"[rnd(5)];
+  synth.triggerAttackRelease(tone + "4", "4n"); // C4の音、2分音符
+  play.innerHTML = "ならす<br>" + tone;
+};
+</script>
+</body>
+</html>
