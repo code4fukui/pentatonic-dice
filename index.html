@@ -16,7 +16,8 @@ import { Tone } from "https://taisukef.github.io/Tone.js/Tone.mjs"; // https://t
 import { rnd } from "https://js.sabae.cc/rnd.js";
 
 const evt = play.ontouchstart ? "ontouchstart" : "onmousedown";
-play[evt] = () => {
+play[evt] = (e) => {
+  e.preventDefault();
   const tone = "CDEGA"[rnd(5)];
   const synth = new Tone.Synth().toMaster();
   synth.triggerAttackRelease(tone + "4", "4n");
